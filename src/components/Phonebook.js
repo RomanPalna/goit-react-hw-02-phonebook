@@ -6,13 +6,29 @@ class Phonebook extends Component {
     name: '',
   };
 
+  handleChange = e => {
+    this.setState({ name: e.target.value });
+  };
+
+  onAddContact = e => {
+    e.preventDefault();
+    // this.props.onChange(this.state.name);
+
+    this.setState({ name: '' });
+  };
+
   render() {
     return (
       <div>
         <h2>Phonebook</h2>
-        <form>
-          <input placeholder="Add name"></input>
-          <button>Add contact</button>
+        <form onSubmit={this.onAddContact}>
+          <input
+            type="text"
+            value={this.state.name}
+            onChange={this.handleChange}
+            placeholder="Add name"
+          ></input>
+          <button type="submit">Add contact</button>
         </form>
         <h2>Contacts</h2>
       </div>
