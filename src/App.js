@@ -12,12 +12,14 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     name: '',
+    number: '',
   };
 
-  addContact = name => {
+  addContact = ({ name, number }) => {
     const contact = {
       id: shortid.generate(),
       name,
+      number,
     };
 
     this.setState(({ contacts }) => ({
