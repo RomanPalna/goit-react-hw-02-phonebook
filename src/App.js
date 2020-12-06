@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Phonebook from './components/Phonebook';
 import Contacts from './components/Contacts';
+import Finder from './components/Finder';
 import shortid from 'shortid';
 
 class App extends Component {
@@ -11,11 +12,12 @@ class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
+    filter: '',
     name: '',
     number: '',
   };
 
-  addContact = ({ name, number }) => {
+  addContact = (name, number) => {
     const contact = {
       id: shortid.generate(),
       name,
@@ -27,13 +29,27 @@ class App extends Component {
     }));
   };
 
+  findContact = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  showContact = () => {
+    const { filter, contacts } = this.state;
+    const normalizeName = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizeName),
+    );
+  };
+
   render() {
     const contactList = this.state.contacts;
 
     return (
       <>
         <Phonebook onSubmit={this.addContact} />;
-        <Contacts contacts={contactList} />
+        <Finder value={this.filter} onChange={this.findContact} />
+        <Contacts contacts={contactList} filterContacts={this.showContact()} />
       </>
     );
   }
