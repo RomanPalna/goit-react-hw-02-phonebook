@@ -49,6 +49,12 @@ class App extends Component {
     );
   };
 
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   render() {
     return (
       <div>
@@ -57,7 +63,10 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <Finder value={this.filter} onChange={this.findContact} />
-        <Contacts contacts={this.showContact()} />
+        <Contacts
+          contacts={this.showContact()}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }
