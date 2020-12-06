@@ -43,13 +43,11 @@ class App extends Component {
   };
 
   render() {
-    const contactList = this.state.contacts;
-
     return (
       <>
         <Phonebook onSubmit={this.addContact} />;
         <Finder value={this.filter} onChange={this.findContact} />
-        <Contacts contacts={contactList} filterContacts={this.showContact()} />
+        <Contacts contacts={this.showContact()} />
       </>
     );
   }
