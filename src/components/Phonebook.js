@@ -26,7 +26,6 @@ class Phonebook extends Component {
   render() {
     return (
       <div>
-        <h2>Phonebook</h2>
         <form onSubmit={this.onAddContact}>
           <input
             type="text"
@@ -42,7 +41,6 @@ class Phonebook extends Component {
           ></input>
           <button type="submit">Add contact</button>
         </form>
-        <h2>Contacts</h2>
       </div>
     );
   }

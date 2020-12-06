@@ -4,6 +4,9 @@ import Contacts from './components/Contacts';
 import Finder from './components/Finder';
 import shortid from 'shortid';
 
+const findContact = (contacts, contact) =>
+  contacts.find(item => item.name.toLowerCase() === contact.name.toLowerCase());
+
 class App extends Component {
   state = {
     contacts: [
@@ -13,8 +16,6 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
   addContact = (name, number) => {
@@ -24,9 +25,15 @@ class App extends Component {
       number,
     };
 
-    this.setState(({ contacts }) => ({
-      contacts: [contact, ...contacts],
-    }));
+    const findContactName = findContact(this.state.contacts, contact);
+
+    if (contact.name) {
+      findContactName
+        ? alert(`${contact.name} is already in contact list!`)
+        : this.setState(({ contacts }) => ({
+            contacts: [contact, ...contacts],
+          }));
+    }
   };
 
   findContact = e => {
@@ -44,11 +51,14 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <Phonebook onSubmit={this.addContact} />;
+      <div>
+        <h2>Phonebook</h2>
+        <Phonebook onSubmit={this.addContact} />
+
+        <h2>Contacts</h2>
         <Finder value={this.filter} onChange={this.findContact} />
         <Contacts contacts={this.showContact()} />
-      </>
+      </div>
     );
   }
 }
