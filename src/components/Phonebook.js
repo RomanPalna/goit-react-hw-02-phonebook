@@ -19,8 +19,7 @@ class Phonebook extends Component {
 
     this.props.onSubmit(this.state.name, this.state.number);
 
-    this.setState({ name: '' });
-    this.setState({ number: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {

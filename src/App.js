@@ -4,7 +4,7 @@ import Contacts from './components/Contacts';
 import Finder from './components/Finder';
 import shortid from 'shortid';
 
-const findContact = (contacts, contact) =>
+const сontactFinder = (contacts, contact) =>
   contacts.find(item => item.name.toLowerCase() === contact.name.toLowerCase());
 
 class App extends Component {
@@ -25,7 +25,7 @@ class App extends Component {
       number,
     };
 
-    const findContactName = findContact(this.state.contacts, contact);
+    const findContactName = сontactFinder(this.state.contacts, contact);
 
     if (contact.name) {
       findContactName
